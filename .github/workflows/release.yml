@@ -58,6 +58,7 @@ jobs:
 
       - name: Bump Version
         run: |
+          git stash
           git config --global user.email "version.bump@github.action.com"
           git config --global user.name "asgardeo-github-bot"
           npm run bump-${{ github.event.inputs.Type }}-version

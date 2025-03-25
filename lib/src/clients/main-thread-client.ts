@@ -194,7 +194,8 @@ export const MainThreadClient = async (
             params: Record<string, unknown>
         }
     ): Promise<BasicUserInfo> => {
-
+        const __config = await _dataLayer.getConfigData();
+        console.log("SPA SDK::: Storage config", __config);
         const basicUserInfo =  await _authenticationHelper.handleSignIn(
             shouldStopAuthn,
             checkSession,

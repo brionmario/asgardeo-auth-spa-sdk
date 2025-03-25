@@ -902,6 +902,10 @@ export class AsgardeoSPAClient {
 
         return mainThreadClient.getDataLayer();
     }
+    
+    public async getConfigData(): Promise<AuthClientConfig<MainThreadClientConfig> | AuthClientConfig<WebWorkerClientConfig> | undefined> {
+        return this._client?.getConfigData();
+    }
 
     /**
      * This method refreshes the access token.

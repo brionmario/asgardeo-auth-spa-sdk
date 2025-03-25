@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { AsgardeoAuthClient, SIGN_OUT_SUCCESS_PARAM, SIGN_OUT_URL } from "@asgardeo/auth-js";
+import { AsgardeoAuthClient, SIGN_OUT_SUCCESS_PARAM, SIGN_OUT_URL } from "@brionmario-experimental/asgardeo-auth-js";
 import { SignOutError } from "..";
 import {
     ERROR,

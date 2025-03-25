@@ -25,7 +25,7 @@ import {
     DecodedIDTokenPayload,
     FetchResponse,
     OIDCEndpoints
-} from "@asgardeo/auth-js";
+} from "@brionmario-experimental/asgardeo-auth-js";
 import { HttpRequestConfig, HttpResponse, Message } from ".";
 import { AuthorizationResponse, WebWorkerClientConfig } from "..";
 

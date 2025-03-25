@@ -21,7 +21,7 @@ import {
     AsgardeoAuthException, 
     AuthClientConfig, 
     BasicUserInfo 
-} from "@asgardeo/auth-js";
+} from "@brionmario-experimental/asgardeo-auth-js";
 import { WebWorkerCore } from "./worker-core";
 import {
     DISABLE_HTTP_HANDLER,

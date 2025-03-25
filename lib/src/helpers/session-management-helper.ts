@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { AsgardeoAuthClient, GetAuthURLConfig, SESSION_STATE } from "@asgardeo/auth-js";
+import { AsgardeoAuthClient, GetAuthURLConfig, SESSION_STATE } from "@brionmario-experimental/asgardeo-auth-js";
 import {
     CHECK_SESSION_SIGNED_IN,
     CHECK_SESSION_SIGNED_OUT,

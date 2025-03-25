@@ -30,7 +30,7 @@ import {
     GetAuthURLConfig,
     OIDCEndpoints,
     TokenResponse
-} from "@asgardeo/auth-js";
+} from "@brionmario-experimental/asgardeo-auth-js";
 import { SPAHelper } from "./spa-helper";
 import {
     ACCESS_TOKEN_INVALID,

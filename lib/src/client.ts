@@ -27,7 +27,7 @@ import {
     DecodedIDTokenPayload,
     FetchResponse,
     OIDCEndpoints
-} from "@asgardeo/auth-js";
+} from "@brionmario-experimental/asgardeo-auth-js";
 import WorkerFile from "web-worker:./worker.ts";
 import { MainThreadClient, WebWorkerClient } from "./clients";
 import { Hooks, REFRESH_ACCESS_TOKEN_ERR0R, Storage } from "./constants";

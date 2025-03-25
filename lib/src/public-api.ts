@@ -29,7 +29,7 @@ export * from "./utils/spa-utils"
 export * from "./constants/storage";
 export * from "./constants/hooks";
 
-export * from "@asgardeo/auth-js";
+export * from "@brionmario-experimental/asgardeo-auth-js";
 
 // clients
 export * from "./clients/main-thread-client";

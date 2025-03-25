@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { AsgardeoAuthClient, DataLayer, REFRESH_TOKEN_TIMER } from "@asgardeo/auth-js";
+import { AsgardeoAuthClient, DataLayer, REFRESH_TOKEN_TIMER } from "@brionmario-experimental/asgardeo-auth-js";
 
 import { AuthenticationHelper, MainThreadClientConfig, WebWorkerClientConfig } from "../";
 

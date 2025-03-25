@@ -33,7 +33,7 @@ import {
     SESSION_STATE,
     STATE,
     Store
-} from "@asgardeo/auth-js";
+} from "@brionmario-experimental/asgardeo-auth-js";
 import {
     DISABLE_HTTP_HANDLER,
     ENABLE_HTTP_HANDLER,

@@ -33,7 +33,7 @@ import {
     STATE,
     SessionData,
     Store
-} from "@asgardeo/auth-js";
+} from "@brionmario-experimental/asgardeo-auth-js";
 import {
     SILENT_SIGN_IN_STATE,
     Storage,

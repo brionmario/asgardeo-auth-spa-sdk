@@ -17,7 +17,7 @@
  */
 
 import { Buffer } from "buffer";
-import { AsgardeoAuthException, CryptoUtils, JWKInterface } from "@asgardeo/auth-js";
+import { AsgardeoAuthException, CryptoUtils, JWKInterface } from "@brionmario-experimental/asgardeo-auth-js";
 import base64url from "base64url";
 import sha256 from "fast-sha256";
 import { createLocalJWKSet, jwtVerify } from "jose";

@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { AsgardeoAuthClient } from "@asgardeo/auth-js";
+import { AsgardeoAuthClient } from "@brionmario-experimental/asgardeo-auth-js";
 import { AuthenticationHelper, SPAHelper } from "./helpers";
 import { WebWorkerClientConfig } from "./models";
 import { workerReceiver } from "./worker/worker-receiver";

@@ -30,7 +30,7 @@ import {
     STATE,
     SessionData,
     Store
-} from "@asgardeo/auth-js";
+} from "@brionmario-experimental/asgardeo-auth-js";
 import { AuthenticationHelper, SPAHelper } from "../helpers";
 import { HttpClient, HttpClientInstance } from "../http-client";
 import {

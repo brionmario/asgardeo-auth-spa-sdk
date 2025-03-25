@@ -16,7 +16,7 @@
 * under the License.
 */
 
-import { AuthClientConfig } from "@asgardeo/auth-js";
+import { AuthClientConfig } from "@brionmario-experimental/asgardeo-auth-js";
 import { Storage } from "../constants";
 
 

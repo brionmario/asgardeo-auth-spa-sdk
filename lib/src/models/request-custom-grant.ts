@@ -16,7 +16,7 @@
 * under the License.
 */
 
-import { CustomGrantConfig } from "@asgardeo/auth-js";
+import { CustomGrantConfig } from "@brionmario-experimental/asgardeo-auth-js";
 
 /**
  * SPA Custom Request Grant config model

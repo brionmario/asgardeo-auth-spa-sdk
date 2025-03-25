@@ -15,7 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import { Store } from "@asgardeo/auth-js";
+import { Store } from "@brionmario-experimental/asgardeo-auth-js";
 
 export class SessionStore implements Store {
     public async setData(key: string, value: string): Promise<void> {

@@ -888,10 +888,10 @@
     "@babel/helper-string-parser" "^7.25.9"
     "@babel/helper-validator-identifier" "^7.25.9"
 
-"@brionmario-experimental/asgardeo-auth-js@^5.2.1":
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/@brionmario-experimental/asgardeo-auth-js/-/asgardeo-auth-js-5.2.1.tgz#c4949576eff059a4697ac53e1d6c647634c806fe"
-  integrity sha512-tZIxSTQBZ90DQN7GO4bbOcCRR8NyIDO6BU6w6tOk9+rAMgTrgS6Ef3O5t/C5xakI7GBw4h5DY+fleIwQufpMoA==
+"@brionmario-experimental/asgardeo-auth-js@^5.2.2":
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/@brionmario-experimental/asgardeo-auth-js/-/asgardeo-auth-js-5.2.2.tgz#dea73a7d1c2c52668fc1f1602fd6f30a1b9320a0"
+  integrity sha512-D+nEH0TePgHf8tl6nhboSNqQ1gd5nq+OG0Dej7o/uxpNKnPiwqNvJuodYCaDW/Nzlm+0oIuwP4ndBfbOJrcazw==
 
 "@eslint/eslintrc@^0.4.3":
   version "0.4.3"

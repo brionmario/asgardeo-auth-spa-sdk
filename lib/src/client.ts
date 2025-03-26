@@ -260,6 +260,25 @@ export class AsgardeoSPAClient {
                 console.log("SPA SDK::: client.ts -> Initialized a main thread client.");
             } else {
                 console.log("SPA SDK::: client.ts -> this._client is defined.");
+                
+                const _config = await this._client?.getConfigData();
+                
+                if (!_config || Object.keys(_config).length === 0) {
+                    console.log("SPA SDK::: client.ts -> this._client is defined but there's no config in storage");
+                    console.log("SPA SDK::: client.ts -> Re-initializing");
+                    const mainThreadClientConfig = config as AuthClientConfig<MainThreadClientConfig>;
+                    const defaultConfig = { ...DefaultConfig } as Partial<AuthClientConfig<MainThreadClientConfig>>;
+                    this._client = await MainThreadClient(
+                        this._instanceID,
+                        { ...defaultConfig, ...mainThreadClientConfig },
+                        (
+                            authClient: AsgardeoAuthClient<MainThreadClientConfig>,
+                            spaHelper: SPAHelper<MainThreadClientConfig>
+                        ) => {
+                            return new this._authHelper(authClient, spaHelper);
+                        }
+                    );
+                }
             }
 
             this._initialized = true;

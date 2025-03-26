@@ -233,6 +233,7 @@ export class AsgardeoSPAClient {
         authHelper?: typeof AuthenticationHelper,
         workerFile?: new () => Worker
     ): Promise<boolean> {
+        console.log("SPA SDK::: client.ts -> Initializing config.", config);
         this._storage = config.storage ?? Storage.SessionStorage;
         this._initialized = false;
         this._startedInitialize = true;
@@ -241,7 +242,9 @@ export class AsgardeoSPAClient {
         workerFile && this.instantiateWorker(workerFile);
 
         if (!(this._storage === Storage.WebWorker)) {
+            console.log("SPA SDK::: client.ts -> Storage is not web worker.");
             if (!this._client) {
+                console.log("SPA SDK::: client.ts -> this._client is undefined.");
                 const mainThreadClientConfig = config as AuthClientConfig<MainThreadClientConfig>;
                 const defaultConfig = { ...DefaultConfig } as Partial<AuthClientConfig<MainThreadClientConfig>>;
                 this._client = await MainThreadClient(
@@ -254,6 +257,9 @@ export class AsgardeoSPAClient {
                         return new this._authHelper(authClient, spaHelper);
                     }
                 );
+                console.log("SPA SDK::: client.ts -> Initialized a main thread client.");
+            } else {
+                console.log("SPA SDK::: client.ts -> this._client is defined.");
             }
 
             this._initialized = true;

@@ -254,6 +254,7 @@ export class AsgardeoSPAClient {
             // Hence, we need to check if the client is initialized but the config object is empty, and reinitialize.
             // Tracker: https://github.com/asgardeo/asgardeo-auth-react-sdk/issues/240
             if (!this._client || (this._client && (!_config || Object.keys(_config)?.length === 0))) {
+                console.log("Initializing Main Thread Client");
                 this._client = await MainThreadClient(
                     this._instanceID,
                     mergedConfig,
@@ -264,6 +265,8 @@ export class AsgardeoSPAClient {
                         return new this._authHelper(authClient, spaHelper);
                     }
                 );
+            } else {
+                console.log("Initializing Main Thread Client skipped. NO MATCH");
             }
 
             this._initialized = true;

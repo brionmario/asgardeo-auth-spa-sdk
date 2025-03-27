@@ -233,7 +233,6 @@ export class AsgardeoSPAClient {
         authHelper?: typeof AuthenticationHelper,
         workerFile?: new () => Worker
     ): Promise<boolean> {
-        console.log("SPA SDK::: client.ts -> Initializing config.", config);
         this._storage = config.storage ?? Storage.SessionStorage;
         this._initialized = false;
         this._startedInitialize = true;
@@ -241,15 +240,23 @@ export class AsgardeoSPAClient {
         authHelper && this.instantiateAuthHelper(authHelper);
         workerFile && this.instantiateWorker(workerFile);
 
+        const _config = await this._client?.getConfigData();
+
         if (!(this._storage === Storage.WebWorker)) {
-            console.log("SPA SDK::: client.ts -> Storage is not web worker.");
-            if (!this._client) {
-                console.log("SPA SDK::: client.ts -> this._client is undefined.");
-                const mainThreadClientConfig = config as AuthClientConfig<MainThreadClientConfig>;
-                const defaultConfig = { ...DefaultConfig } as Partial<AuthClientConfig<MainThreadClientConfig>>;
+            const mainThreadClientConfig = config as AuthClientConfig<MainThreadClientConfig>;
+            const defaultConfig = { ...DefaultConfig } as Partial<AuthClientConfig<MainThreadClientConfig>>;
+            const mergedConfig: AuthClientConfig<MainThreadClientConfig> = { 
+                ...defaultConfig, ...mainThreadClientConfig };
+
+            // If the client is not initialized, initialize it as usual.
+            // NOTE: With React 19 strict mode, the initialization logic runs twice, and there's an intermittent
+            // issue where the config object is not getting stored in the storage layer with Vite scaffolding.
+            // Hence, we need to check if the client is initialized but the config object is empty, and reinitialize.
+            // Tracker: https://github.com/asgardeo/asgardeo-auth-react-sdk/issues/240
+            if (!this._client || (this._client && (!_config || Object.keys(_config)?.length === 0))) {
                 this._client = await MainThreadClient(
                     this._instanceID,
-                    { ...defaultConfig, ...mainThreadClientConfig },
+                    mergedConfig,
                     (
                         authClient: AsgardeoAuthClient<MainThreadClientConfig>,
                         spaHelper: SPAHelper<MainThreadClientConfig>
@@ -257,28 +264,6 @@ export class AsgardeoSPAClient {
                         return new this._authHelper(authClient, spaHelper);
                     }
                 );
-                console.log("SPA SDK::: client.ts -> Initialized a main thread client.");
-            } else {
-                console.log("SPA SDK::: client.ts -> this._client is defined.");
-                
-                const _config = await this._client?.getConfigData();
-                
-                if (!_config || Object.keys(_config).length === 0) {
-                    console.log("SPA SDK::: client.ts -> this._client is defined but there's no config in storage");
-                    console.log("SPA SDK::: client.ts -> Re-initializing");
-                    const mainThreadClientConfig = config as AuthClientConfig<MainThreadClientConfig>;
-                    const defaultConfig = { ...DefaultConfig } as Partial<AuthClientConfig<MainThreadClientConfig>>;
-                    this._client = await MainThreadClient(
-                        this._instanceID,
-                        { ...defaultConfig, ...mainThreadClientConfig },
-                        (
-                            authClient: AsgardeoAuthClient<MainThreadClientConfig>,
-                            spaHelper: SPAHelper<MainThreadClientConfig>
-                        ) => {
-                            return new this._authHelper(authClient, spaHelper);
-                        }
-                    );
-                }
             }
 
             this._initialized = true;
@@ -286,7 +271,12 @@ export class AsgardeoSPAClient {
             if (this._onInitialize) {
                 this._onInitialize(true);
             }
-
+            
+            // Do not sign out the user if the autoLogoutOnTokenRefreshError is set to false.
+            // if (!mergedConfig.autoLogoutOnTokenRefreshError) {                
+            //     return Promise.resolve(true);
+            // }
+            
             window.addEventListener("message", (event) => {
                 if (event?.data?.type === REFRESH_ACCESS_TOKEN_ERR0R) {
                     this.signOut();
@@ -295,7 +285,12 @@ export class AsgardeoSPAClient {
 
             return Promise.resolve(true);
         } else {
-            if (!this._client) {
+            // If the client is not initialized, initialize it as usual.
+            // NOTE: With React 19 strict mode, the initialization logic runs twice, and there's an intermittent
+            // issue where the config object is not getting stored in the storage layer with Vite scaffolding.
+            // Hence, we need to check if the client is initialized but the config object is empty, and reinitialize.
+            // Tracker: https://github.com/asgardeo/asgardeo-auth-react-sdk/issues/240
+            if (!this._client|| (this._client && (!_config || Object.keys(_config)?.length === 0))) {
                 const webWorkerClientConfig = config as AuthClientConfig<WebWorkerClientConfig>;
                 this._client = (await WebWorkerClient(
                     this._instanceID,
@@ -926,10 +921,6 @@ export class AsgardeoSPAClient {
         const mainThreadClient = this._client as MainThreadClientInterface;
 
         return mainThreadClient.getDataLayer();
-    }
-    
-    public async getConfigData(): Promise<AuthClientConfig<MainThreadClientConfig> | AuthClientConfig<WebWorkerClientConfig> | undefined> {
-        return this._client?.getConfigData();
     }
 
     /**

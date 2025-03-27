@@ -1,6 +1,6 @@
 {
     "name": "@brionmario-experimental/asgardeo-auth-spa",
-    "version": "3.1.14",
+    "version": "3.1.15",
     "description": "Asgardeo Auth SPA SDK to be used in Single-Page Applications.",
     "keywords": [
         "Asgardeo",
